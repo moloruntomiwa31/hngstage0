@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Profile Card</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<article data-testid="test-profile-card" class="profile-card">
+			<figure class="avatar-container">
+				<img
+					src="https://i.pravatar.cc/150?img=3"
+					alt="My Avatar"
+					data-testid="test-user-avatar"
+				/>
+			</figure>
+
+			<section class="profile-info">
+				<h2 data-testid="test-user-name">Oloruntomiwa Michael</h2>
+				<p data-testid="test-user-bio">
+					A passionate frontend developer from Nigeria. He loves crafting
+					user-friendly and visually appealing web experiences.
+				</p>
+				<p>
+					Current time (ms):
+					<span data-testid="test-user-time" id="userTime"></span>
+				</p>
+
+				<nav data-testid="test-user-social-links">
+					<ul>
+						<li>
+							<a
+								href="https://x.com/_tomthegrapher"
+								target="_blank"
+								rel="noopener noreferrer"
+								data-testid="test-user-social-twitter"
+								>Twitter</a
+							>
+						</li>
+						<li>
+							<a
+								href="https://github.com/moloruntomiwa31"
+								target="_blank"
+								rel="noopener noreferrer"
+								data-testid="test-user-social-github"
+								>GitHub</a
+							>
+						</li>
+						<li>
+							<a
+								href="https://www.linkedin.com/in/aderibigbe-michael-2b2a7823a/"
+								target="_blank"
+								rel="noopener noreferrer"
+								data-testid="test-user-social-linkedin"
+								>LinkedIn</a
+							>
+						</li>
+					</ul>
+				</nav>
+
+				<section>
+					<h3>Hobbies</h3>
+					<ul data-testid="test-user-hobbies">
+						<li>Watching movies</li>
+						<li>Coding</li>
+						<li>Cooking</li>
+						<li>Listening to music</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Dislikes</h3>
+					<ul data-testid="test-user-dislikes">
+						<li>Slow internet</li>
+						<li>Dishonesty</li>
+					</ul>
+				</section>
+			</section>
+		</article>
+
+		<script src="main.js"></script>
+	</body>
+</html>
