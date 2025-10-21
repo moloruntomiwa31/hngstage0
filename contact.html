@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Contact Us</title>
+		<link rel="stylesheet" href="style.css" />
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				max-width: 600px;
+				margin: 50px auto;
+				padding: 20px;
+			}
+			.form-group {
+				margin-bottom: 20px;
+			}
+			h1,
+			label {
+				color: #fff;
+			}
+			label {
+				display: block;
+				margin-bottom: 5px;
+				font-weight: bold;
+			}
+			input,
+			textarea {
+				width: 100%;
+				padding: 10px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+			}
+			button {
+				background: #007bff;
+				color: white;
+				padding: 12px 24px;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+			}
+			button:hover {
+				background: #0056b3;
+			}
+			.error {
+				color: rgb(248, 132, 132);
+				font-size: 14px;
+				margin-top: 5px;
+			}
+			.success {
+				color: rgb(42, 220, 42);
+				font-size: 16px;
+				margin: 20px 0;
+			}
+			.hidden {
+				display: none;
+			}
+			@media (max-width: 768px) {
+				body {
+					margin: 0;
+					padding: 10px;
+				}
+				.form-group {
+					margin-bottom: 15px;
+				}
+				input,
+				textarea {
+					padding: 8px;
+					box-sizing: border-box;
+				}
+				button {
+					width: 100%;
+					padding: 15px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<nav class="navbar">
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="about.html">About</a></li>
+				<li><a href="contact.html">Contact</a></li>
+			</ul>
+		</nav>
+		<h1>Contact Us</h1>
+
+		<form id="contactForm">
+			<div class="form-group">
+				<label for="name">Full Name</label>
+				<input
+					type="text"
+					id="name"
+					data-testid="test-contact-name"
+					aria-describedby="name-error"
+				/>
+				<div
+					id="name-error"
+					class="error hidden"
+					data-testid="test-contact-error-name"
+				></div>
+			</div>
+
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input
+					type="email"
+					id="email"
+					data-testid="test-contact-email"
+					aria-describedby="email-error"
+				/>
+				<div
+					id="email-error"
+					class="error hidden"
+					data-testid="test-contact-error-email"
+				></div>
+			</div>
+
+			<div class="form-group">
+				<label for="subject">Subject</label>
+				<input
+					type="text"
+					id="subject"
+					data-testid="test-contact-subject"
+					aria-describedby="subject-error"
+				/>
+				<div
+					id="subject-error"
+					class="error hidden"
+					data-testid="test-contact-error-subject"
+				></div>
+			</div>
+
+			<div class="form-group">
+				<label for="message">Message</label>
+				<textarea
+					id="message"
+					rows="5"
+					data-testid="test-contact-message"
+					aria-describedby="message-error"
+				></textarea>
+				<div
+					id="message-error"
+					class="error hidden"
+					data-testid="test-contact-error-message"
+				></div>
+			</div>
+
+			<button type="submit" data-testid="test-contact-submit">Submit</button>
+		</form>
+
+		<div
+			id="success-message"
+			class="success hidden"
+			data-testid="test-contact-success"
+		>
+			Thank you! Your message has been sent successfully.
+		</div>
+
+		<script>
+			document.getElementById("contactForm").addEventListener("submit", (e) => {
+				e.preventDefault();
+
+				const name = document.getElementById("name").value.trim();
+				const email = document.getElementById("email").value.trim();
+				const subject = document.getElementById("subject").value.trim();
+				const message = document.getElementById("message").value.trim();
+
+				let isValid = true;
+
+				// Clear previous errors
+				document.querySelectorAll(".error").forEach((el) => {
+					el.classList.add("hidden");
+					el.textContent = "";
+				});
+
+				// Validate name
+				if (!name) {
+					showError("name-error", "Full name is required");
+					isValid = false;
+				}
+
+				// Validate email
+				if (!email) {
+					showError("email-error", "Email is required");
+					isValid = false;
+				} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+					showError("email-error", "Please enter a valid email address");
+					isValid = false;
+				}
+
+				// Validate subject
+				if (!subject) {
+					showError("subject-error", "Subject is required");
+					isValid = false;
+				}
+
+				// Validate message
+				if (!message) {
+					showError("message-error", "Message is required");
+					isValid = false;
+				} else if (message.length < 10) {
+					showError(
+						"message-error",
+						"Message must be at least 10 characters long"
+					);
+					isValid = false;
+				}
+
+				if (isValid) {
+					document.getElementById("success-message").classList.remove("hidden");
+					document.getElementById("contactForm").reset();
+				}
+			});
+
+			const showError = (elementId, message) => {
+				const errorEl = document.getElementById(elementId);
+				errorEl.textContent = message;
+				errorEl.classList.remove("hidden");
+				if (
+					document
+						.getElementById("success-message")
+						.classList.contains("hidden") === false
+				) {
+					document.getElementById("success-message").classList.add("hidden");
+				}
+			};
+		</script>
+	</body>
+</html>
